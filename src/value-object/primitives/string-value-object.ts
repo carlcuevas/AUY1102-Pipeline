@@ -5,18 +5,22 @@ export abstract class StringValueObject {
     this.value = value;
   }
 
-  // CORRECCIÓN 1: Recibimos un objeto StringValueObject, no un string suelto
-  equalsTo(anotherValue: StringValueObject): boolean {
-    return this.value === anotherValue.value;
+  equalsTo(anotherValue: string | StringValueObject): boolean {
+    const other = anotherValue instanceof StringValueObject 
+      ? anotherValue.value 
+      : anotherValue;
+    return this.value === other;
   }
 
   isEmpty(): boolean {
     return !this.value;
   }
 
-  // CORRECCIÓN 2: Lo mismo aquí para mantener la consistencia
-  differentTo(anotherValue: StringValueObject): boolean {
-    return this.value !== anotherValue.value;
+  differentTo(anotherValue: string | StringValueObject): boolean {
+    const other = anotherValue instanceof StringValueObject 
+      ? anotherValue.value 
+      : anotherValue;
+    return this.value !== other;
   }
 
   hasMoreCharacterThan(length = 30): boolean {
