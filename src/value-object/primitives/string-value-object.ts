@@ -5,24 +5,26 @@ export abstract class StringValueObject {
     this.value = value;
   }
 
-  equalsTo(anotherValue: string): boolean {
-    return this.value === anotherValue;
+  // CORRECCIÓN 1: Recibimos un objeto StringValueObject, no un string suelto
+  equalsTo(anotherValue: StringValueObject): boolean {
+    return this.value === anotherValue.value;
   }
 
   isEmpty(): boolean {
     return !this.value;
   }
 
-  differentTo(anotherValue: string): boolean {
-    return this.value !== anotherValue;
+  // CORRECCIÓN 2: Lo mismo aquí para mantener la consistencia
+  differentTo(anotherValue: StringValueObject): boolean {
+    return this.value !== anotherValue.value;
   }
 
   hasMoreCharacterThan(length = 30): boolean {
-    return this.value.length > length ? true : false;
+    return this.value.length > length;
   }
 
   hasLessCharacterThan(length = 5): boolean {
-    return this.value.length < length ? true : false;
+    return this.value.length < length;
   }
 
   toString(): string {
