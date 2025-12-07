@@ -1,7 +1,18 @@
-FROM node:14-alpine3.16
+FROM node:18-alpine
 
+WORKDIR /app
+
+# Copiamos archivos de dependencias
+COPY package*.json ./
+
+# Instalamos dependencias de forma limpia
+RUN npm ci
+
+# Copiamos el resto del código
 COPY . .
 
-WORKDIR /usr/src/app/
+# Exponemos el puerto
+EXPOSE 3000
 
-RUN npm version
+# Comando de inicio
+CMD ["npm", "start"]
